@@ -1,6 +1,6 @@
 __author__ = 'pyt'
 
-from CeleryPaste.core.paste import Paste
+from CeleryPaste.core.models import Paste
 from CeleryPaste.core.database import DbCouch
 from Queue import Queue
 from threading import Thread

@@ -1,15 +1,14 @@
 __author__ = 'pyt'
 
 from lxml.etree import HTMLParser, parse
-import requests
 from random import choice
-from celery.app.log import get_logger
+from CeleryPaste.celeryctl import logger
 try:
     from cStringIO import StringIO
 except ImportError:
     from StringIO import StringIO
+import requests
 
-logger = get_logger(__name__)
 DEBUG = True
 
 USER_AGENTS = [
