@@ -1,0 +1,19 @@
+__author__ = 'pyt'
+
+import sys
+import os
+sys.path.insert(0, os.getcwd())
+
+
+CELERY_SEND_EVENTS = True
+CELERY_TASK_PUBLISH_RETRY = True
+BROKER_HEARTBEAT = 30
+BROKER_CONNECTION_RETRY = True
+BROKER_CONNECTION_MAX_RETRIES = 100
+BROKER_CONNECTION_TIMEOUT = 4
+
+
+BROKER_URL = "amqp://guest:@127.0.0.1//"
+CELERY_IMPORTS = ("tasks", )
+CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
+CELERY_TIMEZONE = 'UTC'
