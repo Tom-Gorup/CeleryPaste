@@ -1,7 +1,6 @@
 __author__ = 'pyt'
 
-from CeleryPaste.core.models import Paste
-from CeleryPaste.core.database import DbCouch
+from CeleryPaste.core.db_couch import paste_database_couchdb
 from Queue import Queue
 from threading import Thread
 from random import choice
@@ -26,27 +25,20 @@ class FileDownloader(Thread):
     def __init__(self, infos_tuple):
         # infos_tuple is a 2-tuples tuple containing name, the file url
         self.website, self.url = infos_tuple
-        self.initdb = DbCouch()
-        self.db = self.initdb.db
         self.result = None
         self.response = None
         super(FileDownloader, self).__init__()
 
     def run(self):
         try:
-        #if not self.checkExistingLink():
             # download
-            self.response = requests.get(self.url, headers=self.headers(),)
+            self.response = requests.get(self.url, headers=self.headers())
             # DB
-            paste = Paste()
-            paste['website'] = unicode(self.website)
-            paste['link'] = unicode(self.url)
-            paste['content'] = unicode(self.response.text)
-            #paste['added'] = datetime.now()
-            self.db.save(paste)
-        #else:
-            #self.result = (self.url, 'Already')
-            #return
+            paste_database_couchdb.addPaste(
+                _website=unicode(self.website),
+                _link= unicode(self.url),
+                _content=unicode(self.response.text)
+            )
 
         except Exception as err:
             print err.args

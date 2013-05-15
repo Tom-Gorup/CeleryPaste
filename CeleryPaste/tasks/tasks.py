@@ -1,7 +1,9 @@
 __author__ = 'pyt'
+
 from CeleryPaste.core.pastegrabber import PasteGraber
 from CeleryPaste.core.multi_download import MultiFileDownloader
-from CeleryPaste.core.database import DbCouch, DbRedis
+from CeleryPaste.core.db_couch import paste_database_couchdb
+from CeleryPaste.core.db_redis import paste_database_redis
 from CeleryPaste.celeryctl import celery
 
 @celery.task
@@ -62,36 +64,27 @@ def task_download_pastes(info_turples):
     mfd.join()
     return mfd.results
 
-@celery.task
-def task_check_link(info_turples):
-    NewDb = DbCouch()
-    return NewDb.checkExistingLink(info_turples)
 
 # Redis
 @celery.task
 def task_prepare_redis():
-    NewDbCouch = DbCouch()
-    link = NewDbCouch.returnAllLink()
-    NewDbRedis = DbRedis()
-    NewDbRedis.chargeLinkInRedis(link)
+    link = paste_database_couchdb.returnAllLink()
+    paste_database_redis.chargeLinkInRedis(link)
 
 @celery.task
 def task_check_link_redis(infos_turples):
-    NewDbRedis = DbRedis()
-    return NewDbRedis.checkListLink(infos_turples)
+    return paste_database_redis.checkListLink(infos_turples)
 
 @celery.task
 def task_flushall_redis():
-    NewDbRedis = DbRedis()
-    return NewDbRedis.flushallRedis()
+    return paste_database_redis.flushallRedis()
 
 @celery.task
 def task_add_downloaded_link_redis(info_turples):
-    NewDbRedis = DbRedis()
     listtopass = list()
     for li in info_turples:
         link, boolli = li
         if boolli:
             listtopass.append(link)
-    NewDbRedis.chargeLinkInRedis(listtopass)
+    paste_database_redis.chargeLinkInRedis(listtopass)
 
