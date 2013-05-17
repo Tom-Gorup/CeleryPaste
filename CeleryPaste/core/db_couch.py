@@ -32,7 +32,9 @@ class DbCouch():
 
     def returnAllLink(self):
         db_link = []
-        for _link_id in self.db.view(self.PASTE_LINK_VIEW):
+        result =  self.db.view(self.PASTE_LINK_VIEW)
+
+        for _link_id in result:
             db_link.append(_link_id.key)
         return db_link
         #db_link = list()
