@@ -10,15 +10,24 @@ from CeleryPaste.tasks.redis_tasks import (task_add_downloaded_link_redis,
                                            task_check_link_redis,
                                            task_flushall_redis)
 from celery import group,chain
+from CeleryPaste.celeryctl import celery
+from celery.contrib.methods import task_method
 from time import sleep
 
-class Scraper():
-    def __init__(self):
-        self.init = task_flushall_redis.delay()
-        sleep(seconds=3)
-        self.redis = task_prepare_redis.delay()
 
+class Scraper():
+    """Task scheduler."""
     def run(self):
+        self.scraper.delay()
+
+    def init(self):
+        self.init = task_flushall_redis.delay()
+        sleep(1)
+        if self.init.ready():
+            self.redis = task_prepare_redis.delay()
+
+    @celery.task(filter=task_method)
+    def scraper(self):
         res_pastie = chain(task_pastie_grabber.s() |
                            task_check_link_redis.s() |
                            task_download_pastes.s() |
