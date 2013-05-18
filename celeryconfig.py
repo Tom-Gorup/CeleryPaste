@@ -15,14 +15,15 @@ BROKER_CONNECTION_MAX_RETRIES = 100
 BROKER_CONNECTION_TIMEOUT = 4
 CELERY_CREATE_MISSING_QUEUES = True
 
-BROKER_URL = "librabbitmq://guest:@127.0.0.1//"
+BROKER_URL = "amqp://guest:@127.0.0.1//"
+
 CELERY_IMPORTS = ("CeleryPaste.tasks.couchdb_tasks",
                   "CeleryPaste.tasks.download_tasks",
                   "CeleryPaste.tasks.grabers_tasks",
                   "CeleryPaste.tasks.redis_tasks"
 )
 
-CELERY_RESULT_BACKEND = "librabbitmq://guest:@127.0.0.1//"
+CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
 CELERY_TIMEZONE = 'UTC'
 
 CELERY_ROUTES = {
