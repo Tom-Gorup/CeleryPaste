@@ -15,10 +15,10 @@ from celery.contrib.methods import task_method
 from time import sleep
 
 
-class Scraper():
+class Scraper(object):
     """Task scheduler."""
     def run(self):
-        self.scraper.delay()
+        self.worker.delay()
 
     def init(self):
         self.init = task_flushall_redis.delay()

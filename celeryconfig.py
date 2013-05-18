@@ -37,7 +37,7 @@ CELERY_ROUTES = {
 CELERY_CREATE_MISSING_QUEUES = True
 
 CELERYBEAT_SCHEDULE = {
-    'runs-every-6-minute': {
+    'runs-every-1-minute': {
         'task': 'CeleryPaste.tasks.scraper.worker',
         'schedule': timedelta(minutes=1)
     },
