@@ -15,20 +15,28 @@ BROKER_CONNECTION_MAX_RETRIES = 100
 BROKER_CONNECTION_TIMEOUT = 4
 CELERY_CREATE_MISSING_QUEUES = True
 
-BROKER_URL = "amqp://guest:@127.0.0.1//"
-CELERY_IMPORTS = ("CeleryPaste.tasks.tasks", )
-CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
+BROKER_URL = "librabbitmq://guest:@127.0.0.1//"
+CELERY_IMPORTS = ("CeleryPaste.tasks.couchdb_tasks",
+                  "CeleryPaste.tasks.download_tasks",
+                  "CeleryPaste.tasks.grabers_tasks",
+                  "CeleryPaste.tasks.redis_tasks"
+)
+
+CELERY_RESULT_BACKEND = "librabbitmq://guest:@127.0.0.1//"
 CELERY_TIMEZONE = 'UTC'
 
 CELERY_ROUTES = {
-    'CeleryPaste.tasks.': {'queue': 'db'},
-    'CeleryPaste.tasks.z': {'queue': 'garbber'},
-
+    'CeleryPaste.tasks.couchdb_tasks': {'queue': 'db'},
+    'CeleryPaste.tasks.download_tasks': {'queue': 'download'},
+    'CeleryPaste.tasks.grabers_tasks': {'queue': 'grabers'},
+    'CeleryPaste.tasks.redis_tasks': {'queue': 'db'},
 }
 
+CELERY_CREATE_MISSING_QUEUES = True
+
 CELERYBEAT_SCHEDULE = {
-    'runs-every-3-minute': {
-        'task': 'CeleryPaste.tasks..',
-        'schedule': timedelta(minutes=2)
+    'runs-every-6-minute': {
+        'task': 'celerybeat.Scraper.run',
+        'schedule': timedelta(minutes=6)
     },
 }
