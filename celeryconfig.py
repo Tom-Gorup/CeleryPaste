@@ -20,7 +20,8 @@ BROKER_URL = "amqp://guest:@127.0.0.1//"
 CELERY_IMPORTS = ("CeleryPaste.tasks.couchdb_tasks",
                   "CeleryPaste.tasks.download_tasks",
                   "CeleryPaste.tasks.grabers_tasks",
-                  "CeleryPaste.tasks.redis_tasks"
+                  "CeleryPaste.tasks.redis_tasks",
+                  "celerybeat"
 )
 
 CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
@@ -38,6 +39,6 @@ CELERY_CREATE_MISSING_QUEUES = True
 CELERYBEAT_SCHEDULE = {
     'runs-every-6-minute': {
         'task': 'celerybeat.Scraper.run',
-        'schedule': timedelta(minutes=6)
+        'schedule': timedelta(minutes=1)
     },
 }
