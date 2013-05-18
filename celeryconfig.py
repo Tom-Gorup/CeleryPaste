@@ -38,7 +38,7 @@ CELERY_CREATE_MISSING_QUEUES = True
 
 CELERYBEAT_SCHEDULE = {
     'runs-every-6-minute': {
-        'task': 'CeleryPaste.tasks.scraper.Scraper.run',
+        'task': 'CeleryPaste.tasks.scraper.worker',
         'schedule': timedelta(minutes=1)
     },
 }

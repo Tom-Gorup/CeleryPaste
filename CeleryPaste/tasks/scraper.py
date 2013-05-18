@@ -27,7 +27,7 @@ class Scraper():
             self.redis = task_prepare_redis.delay()
 
     @celery.task(filter=task_method)
-    def scraper(self):
+    def worker(self):
         res_pastie = chain(task_pastie_grabber.s() |
                            task_check_link_redis.s() |
                            task_download_pastes.s() |
