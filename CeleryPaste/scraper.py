@@ -2,7 +2,7 @@ __author__ = 'pyt'
 
 import time
 from celery import group,chain
-from tasks.tasks import task_download_pastes,task_nopaste_grabber,\
+from CeleryPaste.tasks.tasks import task_download_pastes,task_nopaste_grabber,\
     task_pastebin_grabber,task_pastesite_grabber, task_pastie_grabber,\
     task_prepare_redis, task_check_link_redis, task_flushall_redis,\
     task_add_downloaded_link_redis
