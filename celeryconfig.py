@@ -21,7 +21,7 @@ CELERY_IMPORTS = ("CeleryPaste.tasks.couchdb_tasks",
                   "CeleryPaste.tasks.download_tasks",
                   "CeleryPaste.tasks.grabers_tasks",
                   "CeleryPaste.tasks.redis_tasks",
-                  "celerybeat"
+                  "CeleryPaste.tasks.scraper"
 )
 
 CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
