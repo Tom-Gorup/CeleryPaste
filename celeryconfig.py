@@ -16,7 +16,7 @@ BROKER_CONNECTION_TIMEOUT = 4
 CELERY_CREATE_MISSING_QUEUES = True
 
 BROKER_URL = "amqp://guest:@127.0.0.1//"
-CELERY_IMPORTS = ("tasks", )
+CELERY_IMPORTS = ("CeleryPaste.tasks.tasks", )
 CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
 CELERY_TIMEZONE = 'UTC'
 
