@@ -56,7 +56,7 @@ class PasteGraber(object):
             if DEBUG:
                 logger.debug("%s: list turples: %s " % (self.grabber_name, list_turples))
 
-            return list_turples
+            return (len(list_turples), list_turples)
 
     def headers(self):
         headers = {'User-Agent': choice(USER_AGENTS)}
