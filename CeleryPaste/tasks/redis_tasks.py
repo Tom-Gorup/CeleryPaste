@@ -5,7 +5,8 @@ from CeleryPaste.celeryctl import celery
 
 @celery.task
 def task_check_link_redis(infos_turples):
-    return paste_database_redis.checkListLink(infos_turples)
+    number, l_links = infos_turples
+    return paste_database_redis.checkListLink(l_links)
 
 @celery.task
 def task_flushall_redis():

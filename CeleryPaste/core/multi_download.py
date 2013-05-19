@@ -55,7 +55,7 @@ class FileDownloader(Thread):
 class MultiFileDownloader(object):
     """Downloads multiple files in multiple parallels threads."""
     def __init__(self, infos_tuples):
-        self.number, self.infos_tuples = infos_tuples
+        self.infos_tuples = infos_tuples
         self.results = []
         self.queue = Queue(4)
 
