@@ -2,7 +2,7 @@ __author__ = 'pyt'
 
 from CeleryPaste.core.models import Paste, paste_link
 from CeleryPaste.core.settings import app
-from flask.ext.couchdb import CouchDBManager
+from CeleryPaste.ext.flaskcouchdb.couchdb import CouchDBManager
 import uuid
 
 class DbCouch():
