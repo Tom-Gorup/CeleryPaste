@@ -43,15 +43,15 @@ class Scraper(object):
                              task_download_pastes.s() |
                              task_add_downloaded_link_redis.s()
         )
-        res_pastesite = chain(task_pastesite_grabber.s() |
-                              task_check_link_redis.s() |
-                              task_download_pastes.s() |
-                              task_add_downloaded_link_redis.s()
-        )
+        # res_pastesite = chain(task_pastesite_grabber.s() |
+        #                       task_check_link_redis.s() |
+        #                       task_download_pastes.s() |
+        #                       task_add_downloaded_link_redis.s()
+        # )
         g_res = group(res_nopaste,
                       res_pastie,
                       res_pastebin,
-                      res_pastesite
+                      # res_pastesite
         )
         g_res.apply_async()
 

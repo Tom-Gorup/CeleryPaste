@@ -24,7 +24,7 @@ class DbCouch():
         item_paste = Paste(
             website=_website,
             link=_link,
-            content = _content
+            content=_content
         )
         item_paste.id = uuid.uuid4().hex
         item_paste.store(db=self.db)
