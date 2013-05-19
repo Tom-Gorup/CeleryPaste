@@ -1,6 +1,6 @@
 __author__ = 'pyt'
 
-from flask.ext.couchdb import Document, TextField, DateTimeField, ViewDefinition
+from CeleryPaste.ext.flaskcouchdb.couchdb import Document, TextField, DateTimeField, ViewDefinition
 from datetime import datetime
 
 class Paste(Document):
