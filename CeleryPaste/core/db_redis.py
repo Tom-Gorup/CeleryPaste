@@ -5,15 +5,18 @@ import redis
 import base64
 
 class DbRedis():
+    _db = None
+
     def __init__(self):
         self.db_host = REDIS_HOST
         self.db_port = REDIS_PORT
         self.db_name = REDIS_DB
-        self.db = None
-        self.initDb()
 
-    def initDb(self):
-        self.db = redis.StrictRedis(host=self.db_host, port=self.db_port, db=self.db_name)
+    @property
+    def db(self):
+        if self._db is None:
+            self._db = redis.StrictRedis(host=self.db_host, port=self.db_port, db=self.db_name)
+        return self._db
 
     def chargeLinkInRedis(self, db_link):
         for li in db_link:
@@ -33,6 +36,5 @@ class DbRedis():
 
     def flushallRedis(self):
         return self.db.flushall()
-
 
 paste_database_redis = DbRedis()
