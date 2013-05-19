@@ -1,10 +1,10 @@
 CeleryPaste v0.3
-===========
+================
 
 PasteGraber with celery to download Paste on differents website (e.g: pastebin.com, nopaste.org).
 
 How to install
-==============
+--------------
 
 On ubuntu 13.04 :
 
@@ -30,5 +30,5 @@ And finally launch the tasks:
     $ python celery_scraper.py
 
 dev ongoing !
-===========
+-------------
 
