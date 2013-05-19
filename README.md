@@ -3,13 +3,17 @@ CeleryPaste v0.3
 
 PasteGraber with celery to download Paste on differents website (e.g: pastebin.com, nopaste.org).
 
+How to install
+==============
 
-On ubuntu 13.04
+On ubuntu 13.04 :
+
     $ sudo apt-get install python-dev python-pip python-lxml couchdb redis-server git rabbitmq-server
 
     $ pip install requests celery simplejson flask couchdb redis
 
 For starting the worker :
+
     # pyt at DELL-P1128 in /opt/test/CeleryPaste on git:master o [23:19:29]
     $ ll
     total 40
@@ -21,7 +25,10 @@ For starting the worker :
 
     $ celery worker -E --config=celeryconfig  --loglevel=DEBUG --concurrency=4
 
+And finally launch the tasks:
+
     $ python celery_scraper.py
 
 dev ongoing !
 ===========
+
