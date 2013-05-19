@@ -4,7 +4,7 @@ CeleryPaste v0.3
 PasteGraber with celery to download Paste on differents website (e.g: pastebin.com, nopaste.org).
 
 How to install in standalone
---------------
+----------------------------
 
 On ubuntu 13.04 :
 
@@ -30,8 +30,10 @@ And finally launch the tasks:
     $ python celery_scraper.py
 
 How to configure
+----------------
 
 for Database -> CeleryPaste/core/settings :
+
     # DB Couchdb
     COUCHDB_SERVER="http://127.0.0.1:5984"
     COUCHDB_DATABASE="paste"
@@ -42,6 +44,7 @@ for Database -> CeleryPaste/core/settings :
     REDIS_DB = '0'
 
 for transportation (AMQP) -> celeryconfig :
+
     BROKER_URL = "amqp://guest:@127.0.0.1//"
     CELERY_RESULT_BACKEND = "amqp://guest:@127.0.0.1//"
 
