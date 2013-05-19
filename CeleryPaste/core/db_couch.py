@@ -13,6 +13,7 @@ class DbCouch():
         self.couch_manager = CouchDBManager()
         self.couch_manager.add_document(Paste)
         self.couch_manager.add_viewdef(paste_link)
+        self.couch_manager.sync(app)
 
     @property
     def db(self):
