@@ -54,3 +54,57 @@ def task_pastesite_grabber():
     if run is None:
         raise task_pastesite_grabber.retry(countdown=60)
     return run
+
+@celery.task
+def task_pastebinca_grabber():
+    pastebinca_grabber = PasteGraber(
+           "pastebin.ca","http://pastebin.ca",
+           'http://pastebin.ca/raw/%s',
+           '//div[@id="idmenurecent-collapse"]//a/@href',
+            links_post_process=lambda i: i.split('/')[-1]
+    )
+    run = pastebinca_grabber.run()
+    if run is None:
+        raise task_pastebinca_grabber.retry(countdown=60)
+    return run
+
+@celery.task
+def task_pastefrubar_net_grabber():
+    pastef_rubar_net_grabber = PasteGraber(
+           "paste.frubar.net","http://paste.frubar.net/",
+            'http://paste.frubar.net/download/%s',
+           '//div[@id="menu"]/ul[1]/li/a/@href',
+            links_post_process=lambda i: i.split('/')[-1]
+    )
+    run = pastef_rubar_net_grabber.run()
+    if run is None:
+        raise task_pastefrubar_net_grabber.retry(countdown=60)
+    return run
+
+
+@celery.task
+def task_paste_is_grabber():
+    paste_is_grabber = PasteGraber(
+           "paste.is","http://paste.is/all/",
+            'http://paste.is/%s/raw/',
+           '//div[@class="visible"]//a/@href',
+            links_post_process=lambda i: i.split('/')[1]
+    )
+    run = paste_is_grabber.run()
+    if run is None:
+        raise task_paste_is_grabber.retry(countdown=60)
+    return run
+
+@celery.task
+def task_paste_ie_grabber():
+    paste_ie_grabber = PasteGraber(
+           "paste.ie","http://paste.ie/lists",
+            'http://paste.ie/view/raw/%s',
+           '//table[@class="recent"]//a/@href',
+            links_post_process=lambda i: i.split('/')[-1]
+    )
+    run = paste_ie_grabber.run()
+    if run is None:
+        raise task_paste_ie_grabber.retry(countdown=60)
+    return run
+
