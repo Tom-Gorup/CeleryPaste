@@ -50,4 +50,8 @@ for transportation (AMQP) -> celeryconfig :
 
 dev ongoing !
 -------------
-
+- Will be adding the following sites
+	- pastebin.com
+	- Slexy.org
+	- cdv.lt
+	- snipt.net
